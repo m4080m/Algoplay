@@ -18,7 +18,7 @@ export default function Home() {
   const [algorithms, setAlgorithms] = useState<Algorithm[]>([]);
 
   useEffect(() => {
-    fetch('/algorithms/index.json')
+    fetch('/algoplay/algorithms/index.json')
       .then(response => response.json())
       .then((data: AlgorithmList) => setAlgorithms(data.algorithms))
       .catch(error => console.error('알고리즘 목록을 불러오는데 실패했습니다:', error));
