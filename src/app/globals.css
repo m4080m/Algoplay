@@ -2,6 +2,18 @@
 @tailwind components;
 @tailwind utilities;
 
+@font-face {
+  font-family: 'Pretendard-Regular';
+  src: url('https://fastly.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff') format('woff');
+  font-weight: 400;
+  font-style: normal;
+}
+
+/* 기본 폰트 설정 */
+.pretendard {
+  font-family: 'Pretendard-Regular', sans-serif;
+}
+
 :root {
   --background: #ffffff;
   --foreground: #171717;

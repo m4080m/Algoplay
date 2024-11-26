@@ -120,20 +120,20 @@ export default function AlgorithmDescription({
       <div className="flex items-center gap-4 mb-6">
         <Link 
           href="/"
-          className="text-sm text-blue-600 hover:text-blue-800"
+          className="text-base text-blue-600 hover:text-blue-800"
         >
           ← 목록으로
         </Link>
-        <h1 className="text-2xl font-bold">{content.title}</h1>
+        <h1 className="text-3xl font-bold">{content.title}</h1>
       </div>
-      <div className="text-sm text-gray-500 mb-4">
+      <div className="text-base text-gray-500 mb-4">
         ↑↓ 화살표 키나 스크롤을 사용하여 단계를 이동할 수 있습니다
       </div>
       {content.steps.map((step, index) => (
         <p
           key={index}
           ref={setParagraphRef(index)}
-          className={`p-4 rounded transition-opacity duration-300 ${
+          className={`p-4 rounded transition-opacity duration-300 text-lg leading-relaxed ${
             currentStep === index
               ? "opacity-100"
               : "opacity-30"
