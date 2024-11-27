@@ -8,10 +8,10 @@ interface AlgorithmPageProps {
 }
 
 export default async function AlgorithmPage({ params }: AlgorithmPageProps) {
-  const id = await params.id;
+  const resolvedParams = await params;
   return (
     <div className="min-h-screen">
-      <AlgorithmLayout algorithmId={id} />
+      <AlgorithmLayout algorithmId={resolvedParams.id} />
     </div>
   );
 } 
