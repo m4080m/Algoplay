@@ -4,16 +4,12 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "next build && next export",
+    "build": "next build",
     "start": "next start",
-    "lint": "next lint",
-    "predeploy": "npm run build",
-    "deploy": "gh-pages -d out",
-    "static": "next build && next export && touch out/.nojekyll"
+    "lint": "next lint"
   },
   "dependencies": {
     "@rive-app/react-canvas": "^4.16.1",
-    "gh-pages": "^6.2.0",
     "next": "15.0.2",
     "react": "19.0.0-rc-02c0e824-20241028",
     "react-dom": "19.0.0-rc-02c0e824-20241028",
@@ -28,6 +24,5 @@
     "postcss": "^8",
     "tailwindcss": "^3.4.1",
     "typescript": "^5"
-  },
-  "homepage": "https://m4080m.github.io/algoplay"
+  }
 }
