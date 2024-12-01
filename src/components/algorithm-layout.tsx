@@ -30,7 +30,6 @@ export default function AlgorithmLayout({ algorithmId }: AlgorithmLayoutProps) {
       <div className="w-full md:w-1/2 h-[50vh] md:h-screen">
         <AlgorithmVisualization 
           algorithmId={algorithmId}
-          currentStep={currentStep}
           currentState={currentState}
         />
       </div>

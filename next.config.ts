@@ -1,7 +1,14 @@
 import type { NextConfig } from "next";
 
+const assetPrefix =
+  process.env.NODE_ENV === 'production' ? 'https://m4080m.github.io/Algoplay/' : '';
+const basePathPrefix =
+  process.env.NODE_ENV === 'production' ? '/Algoplay' : '';
+
 const nextConfig: NextConfig = {
-  /* config options here */
+  output: 'export',
+  assetPrefix: assetPrefix,
+  basePath: basePathPrefix,
 };
 
 export default nextConfig;

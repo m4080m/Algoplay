@@ -5,13 +5,11 @@ import { useRive, StateMachineInput, StateMachineInputType } from '@rive-app/rea
 
 interface AlgorithmVisualizationProps {
   algorithmId: string;
-  currentStep: number;
   currentState: number;
 }
 
 export default function AlgorithmVisualization({ 
   algorithmId,
-  currentStep,
   currentState 
 }: AlgorithmVisualizationProps) {
   const { rive, RiveComponent } = useRive({
