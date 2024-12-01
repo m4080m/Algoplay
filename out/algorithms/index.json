@@ -1,0 +1,22 @@
+{
+  "algorithms": [
+    {
+      "id": "bubble-sort",
+      "title": "버블 정렬 (Bubble Sort)",
+      "description": "인접한 두 원소를 비교하여 정렬하는 가장 기본적인 정렬 알고리즘",
+      "category": "정렬"
+    },
+    {
+      "id": "quick-sort",
+      "title": "퀵 정렬 (Quick Sort)",
+      "description": "분할 정복 방법을 통해 주어진 배열을 정렬합니다.",
+      "category": "정렬"
+    },
+    {
+      "id": "bfs-search",
+      "title": "너비 우선 탐색 (BFS)",
+      "description": "그래프의 시작 노드에서 가까운 순서대로 탐색하는 알고리즘",
+      "category": "그래프, 탐색"
+    }
+  ]
+} 
