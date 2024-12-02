@@ -13,7 +13,7 @@ export default function AlgorithmVisualization({
   currentState 
 }: AlgorithmVisualizationProps) {
   const { rive, RiveComponent } = useRive({
-    src: `/animations/${algorithmId}.riv`,
+    src: `../animations/${algorithmId}.riv`,
     stateMachines: 'State Machine 1',
     autoplay: true,
   });

@@ -36,7 +36,7 @@ export default function AlgorithmDescription({
   const paragraphRefs = useRef<(HTMLParagraphElement | null)[]>([]);
 
   useEffect(() => {
-    fetch(`/algorithms/${algorithmId}.json`)
+    fetch(`../algorithms/${algorithmId}.json`)
       .then(response => response.json())
       .then(data => setContent(data))
       .catch(error => console.error('알고리즘 데이터를 불러오는데 실패했습니다:', error));
