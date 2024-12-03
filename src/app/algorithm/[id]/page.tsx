@@ -9,7 +9,7 @@ interface AlgorithmPageProps {
 
 export function generateStaticParams() {
   // TODO: fetch from index.json
-  return [{ id: 'bfs-search' }, { id: 'bubble-sort' }, { id: 'quick-sort' }]
+  return [{ id: 'bfs-search' }, { id: 'bubble-sort' }, { id: 'quick-sort' }, { id: 'kmp' }]
 }
 
 export default async function AlgorithmPage({ params }: AlgorithmPageProps) {
