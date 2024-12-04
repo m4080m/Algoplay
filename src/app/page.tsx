@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 
 interface Algorithm {
   id: string;
@@ -26,7 +27,16 @@ export default function Home() {
 
   return (
     <div className="min-h-screen px-16 py-12 max-w-7xl mx-auto">
-      <h1 className="text-4xl font-bold mb-12">알고리즘 시각화 플랫폼</h1>
+      <div className="relative w-full mb-12 flex justify-center">
+        <Image
+          src="../banner.png"
+          alt="알고리즘 시각화 플랫폼"
+          width={1200}
+          height={300}
+          priority
+          className="w-auto h-auto"
+        />
+      </div>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
         {algorithms.map((algo) => (
           <Link 
