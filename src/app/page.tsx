@@ -29,7 +29,7 @@ export default function Home() {
     <div className="min-h-screen px-16 py-12 max-w-7xl mx-auto">
       <div className="relative w-full mb-12 flex justify-center">
         <Image
-          src="../banner.png"
+          src="banner.png"
           alt="알고리즘 시각화 플랫폼"
           width={1200}
           height={300}
