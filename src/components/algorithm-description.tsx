@@ -17,12 +17,14 @@ interface AlgorithmDescriptionProps {
   algorithmId: string;
   currentStep: number;
   onStepChange: (step: number, state: number) => void;
+  onStepsLengthChange: (length: number) => void;
 }
 
 export default function AlgorithmDescription({ 
   algorithmId,
   currentStep, 
-  onStepChange 
+  onStepChange,
+  onStepsLengthChange 
 }: AlgorithmDescriptionProps) {
   const [content, setContent] = useState<AlgorithmContent>({
     title: '',
@@ -38,9 +40,12 @@ export default function AlgorithmDescription({
   useEffect(() => {
     fetch(`../algorithms/${algorithmId}.json`)
       .then(response => response.json())
-      .then(data => setContent(data))
+      .then(data => {
+        setContent(data);
+        onStepsLengthChange(data.steps.length);
+      })
       .catch(error => console.error('알고리즘 데이터를 불러오는데 실패했습니다:', error));
-  }, [algorithmId]);
+  }, [algorithmId, onStepsLengthChange]);
 
   useEffect(() => {
     paragraphRefs.current = paragraphRefs.current.slice(0, content.steps.length);
@@ -127,7 +132,7 @@ export default function AlgorithmDescription({
         <h1 className="text-3xl font-bold">{content.title}</h1>
       </div>
       <div className="text-base text-gray-500 mb-4">
-        ↑↓ 화살표 키나 스크롤을 사용하여 단계를 이동할 수 있습니다
+        ↑↓ 화살표 키, 스크롤 또는 스와이프로 단계를 이동할 수 있습니다
       </div>
       {content.steps.map((step, index) => (
         <p
