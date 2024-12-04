@@ -9,7 +9,7 @@
     {
       "id": "quick-sort",
       "title": "퀵 정렬 (Quick Sort)",
-      "description": "분할 정복 방법을 통해 주어진 배열을 정렬합니다.",
+      "description": "분할 정복 방법을 통해 주어진 배열을 정렬하는 알고리즘",
       "category": "정렬"
     },
     {
@@ -17,6 +17,12 @@
       "title": "너비 우선 탐색 (BFS)",
       "description": "그래프의 시작 노드에서 가까운 순서대로 탐색하는 알고리즘",
       "category": "그래프, 탐색"
+    },
+    {
+      "id": "kmp",
+      "title": "Knuth-Morris-Pratt 알고리즘 (KMP)",
+      "description": "문자열 탐색을 빠르게 수행할 수 있는 알고리즘",
+      "category": "문자열"
     }
   ]
 } 
