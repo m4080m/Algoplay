@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect, use } from 'react';
+import { useState, useEffect } from 'react';
 import AlgorithmDescription from './algorithm-description';
 import AlgorithmVisualization from './algorithm-visualization';
 
@@ -38,7 +38,7 @@ export default function AlgorithmLayout({ algorithmId }: AlgorithmLayoutProps) {
     setTouchEnd(e.changedTouches[0].clientY);
   };
 
-  const handleTouchEnd = (e: TouchEvent) => {
+  const handleTouchEnd = () => {
     if (!touchStart || !touchEnd) return;
 
     const distance = touchStart - touchEnd;
@@ -75,7 +75,7 @@ export default function AlgorithmLayout({ algorithmId }: AlgorithmLayoutProps) {
       document.body.style.overflow = '';
       document.documentElement.style.overflow = '';
     };
-  }, [currentStep, content.steps.length, touchStart, touchEnd]);
+  }, [currentStep, content.steps.length, touchStart, touchEnd, handleTouchMove, handleTouchEnd]);
 
   const handleStepChange = (step: number, state?: number) => {
     setCurrentStep(step);

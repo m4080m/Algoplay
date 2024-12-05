@@ -1,6 +1,6 @@
 'use client'
 
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef } from 'react';
 import Link from 'next/link';
 
 interface Step {
@@ -26,11 +26,9 @@ export const isTouchScreen =
   && window.matchMedia('(hover: none) and (pointer: coarse)').matches;
 
 export default function AlgorithmDescription({ 
-  algorithmId,
   currentStep, 
   onStepChange,
-  content,
-  setContent
+  content
 }: AlgorithmDescriptionProps) {
   const lastScrollTime = useRef<number>(Date.now());
   const SCROLL_COOLDOWN = 500;
