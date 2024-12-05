@@ -47,11 +47,12 @@ export default function AlgorithmDescription({
       const paragraphTop = currentParagraph.offsetTop;
       const containerHeight = container.clientHeight;
       const paragraphHeight = currentParagraph.clientHeight;
+      console.log(paragraphTop, containerHeight, paragraphHeight, paragraphTop - (containerHeight * 0.5) + (paragraphHeight * 0.5));
       
       let scrollPosition;
       if (isTouchScreen) {
         // 모바일: 화면 하단에 위치
-        scrollPosition = paragraphTop - (containerHeight * 1.4);
+        scrollPosition = paragraphTop - (containerHeight * 1.5) + (paragraphHeight * 0.5);
       } else {
         // 데스크톱: 화면 중앙에 위치
         scrollPosition = paragraphTop - (containerHeight * 0.5) + (paragraphHeight * 0.5);
