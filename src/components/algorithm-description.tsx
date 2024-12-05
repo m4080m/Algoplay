@@ -20,6 +20,10 @@ interface AlgorithmDescriptionProps {
   onStepsLengthChange: (length: number) => void;
 }
 
+export const isTouchScreen =
+  typeof window !== 'undefined' 
+  && window.matchMedia('(hover: none) and (pointer: coarse)').matches;
+
 export default function AlgorithmDescription({ 
   algorithmId,
   currentStep, 
@@ -60,10 +64,17 @@ export default function AlgorithmDescription({
       const containerHeight = container.clientHeight;
       const paragraphHeight = currentParagraph.clientHeight;
       
-      const scrollPosition = paragraphTop - (containerHeight / 2) + (paragraphHeight / 2);
+      let scrollPosition;
+      if (isTouchScreen) {
+        // 모바일: 화면 하단에 위치
+        scrollPosition = paragraphTop - (containerHeight * 1.4);
+      } else {
+        // 데스크톱: 화면 중앙에 위치
+        scrollPosition = paragraphTop - (containerHeight * 0.5) + (paragraphHeight * 0.5);
+      }
       
       container.scrollTo({
-        top: scrollPosition,
+        top: Math.max(0, scrollPosition),
         behavior: 'smooth'
       });
     }
