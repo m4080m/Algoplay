@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, use } from 'react';
 import AlgorithmDescription from './algorithm-description';
 import AlgorithmVisualization from './algorithm-visualization';
 
@@ -15,19 +15,14 @@ export default function AlgorithmLayout({ algorithmId }: AlgorithmLayoutProps) {
   const [touchEnd, setTouchEnd] = useState<number | null>(null);
   const [stepsLength, setStepsLength] = useState(0);
 
-  // 터치 이벤트 처리
-  const handleTouchStart = (e: TouchEvent) => {
-    e.preventDefault();
-    setTouchStart(e.targetTouches[0].clientY);
-  };
-
   const handleTouchMove = (e: TouchEvent) => {
-    e.preventDefault();
-    setTouchEnd(e.targetTouches[0].clientY);
+    if(e.cancelable) e.preventDefault();
+    if(!touchStart) setTouchStart(e.changedTouches[0].clientY);
+    setTouchEnd(e.changedTouches[0].clientY);
   };
 
   const handleTouchEnd = (e: TouchEvent) => {
-    e.preventDefault();
+    // e.preventDefault();
     if (!touchStart || !touchEnd) return;
 
     const distance = touchStart - touchEnd;
@@ -36,22 +31,18 @@ export default function AlgorithmLayout({ algorithmId }: AlgorithmLayoutProps) {
 
     if (isSwipeUp) {
       const newStep = Math.min(stepsLength - 1, currentStep + 1);
-      console.log("swipe up", newStep);
       handleStepChange(newStep);
     }
     if (isSwipeDown) {
       const newStep = Math.max(0, currentStep - 1);
-      console.log("swipe down", newStep);
       handleStepChange(newStep);
     }
-
     setTouchStart(null);
     setTouchEnd(null);
   };
 
   useEffect(() => {
     // 터치 이벤트 리스너 등록
-    window.addEventListener('touchstart', handleTouchStart, { passive: false });
     window.addEventListener('touchmove', handleTouchMove, { passive: false });
     window.addEventListener('touchend', handleTouchEnd, { passive: false });
 
@@ -60,7 +51,7 @@ export default function AlgorithmLayout({ algorithmId }: AlgorithmLayoutProps) {
     document.documentElement.style.overflow = 'hidden';
 
     return () => {
-      window.removeEventListener('touchstart', handleTouchStart);
+      // window.removeEventListener('touchstart', handleTouchStart);
       window.removeEventListener('touchmove', handleTouchMove);
       window.removeEventListener('touchend', handleTouchEnd);
       
@@ -68,7 +59,7 @@ export default function AlgorithmLayout({ algorithmId }: AlgorithmLayoutProps) {
       document.body.style.overflow = '';
       document.documentElement.style.overflow = '';
     };
-  }, [currentStep, stepsLength]);
+  }, [currentStep, stepsLength, touchStart, touchEnd]);
 
   const handleStepChange = (step: number, state?: number) => {
     setCurrentStep(step);
