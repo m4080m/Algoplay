@@ -17,7 +17,8 @@ interface AlgorithmDescriptionProps {
   algorithmId: string;
   currentStep: number;
   onStepChange: (step: number, state: number) => void;
-  onStepsLengthChange: (length: number) => void;
+  content: AlgorithmContent;
+  setContent: React.Dispatch<React.SetStateAction<AlgorithmContent>>;
 }
 
 export const isTouchScreen =
@@ -28,28 +29,13 @@ export default function AlgorithmDescription({
   algorithmId,
   currentStep, 
   onStepChange,
-  onStepsLengthChange 
+  content,
+  setContent
 }: AlgorithmDescriptionProps) {
-  const [content, setContent] = useState<AlgorithmContent>({
-    title: '',
-    steps: []
-  });
-  
   const lastScrollTime = useRef<number>(Date.now());
   const SCROLL_COOLDOWN = 500;
-  
   const containerRef = useRef<HTMLDivElement>(null);
   const paragraphRefs = useRef<(HTMLParagraphElement | null)[]>([]);
-
-  useEffect(() => {
-    fetch(`../algorithms/${algorithmId}.json`)
-      .then(response => response.json())
-      .then(data => {
-        setContent(data);
-        onStepsLengthChange(data.steps.length);
-      })
-      .catch(error => console.error('알고리즘 데이터를 불러오는데 실패했습니다:', error));
-  }, [algorithmId, onStepsLengthChange]);
 
   useEffect(() => {
     paragraphRefs.current = paragraphRefs.current.slice(0, content.steps.length);

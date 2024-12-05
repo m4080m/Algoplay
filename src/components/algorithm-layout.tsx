@@ -8,12 +8,29 @@ interface AlgorithmLayoutProps {
   algorithmId: string;
 }
 
+interface Step {
+  text: string;
+  state: number;
+}
+
+interface AlgorithmContent {
+  title: string;
+  steps: Step[];
+}
+
 export default function AlgorithmLayout({ algorithmId }: AlgorithmLayoutProps) {
   const [currentStep, setCurrentStep] = useState(0);
   const [currentState, setCurrentState] = useState(0);
   const [touchStart, setTouchStart] = useState<number | null>(null);
   const [touchEnd, setTouchEnd] = useState<number | null>(null);
-  const [stepsLength, setStepsLength] = useState(0);
+  const [content, setContent] = useState<AlgorithmContent>({ title: '', steps: [] });
+
+  useEffect(() => {
+    fetch(`../algorithms/${algorithmId}.json`)
+      .then(response => response.json())
+      .then(data => setContent(data))
+      .catch(error => console.error('알고리즘 데이터를 불러오는데 실패했습니다:', error));
+  }, [algorithmId]);
 
   const handleTouchMove = (e: TouchEvent) => {
     if(e.cancelable) e.preventDefault();
@@ -22,7 +39,6 @@ export default function AlgorithmLayout({ algorithmId }: AlgorithmLayoutProps) {
   };
 
   const handleTouchEnd = (e: TouchEvent) => {
-    // e.preventDefault();
     if (!touchStart || !touchEnd) return;
 
     const distance = touchStart - touchEnd;
@@ -30,12 +46,12 @@ export default function AlgorithmLayout({ algorithmId }: AlgorithmLayoutProps) {
     const isSwipeDown = distance < -50;
 
     if (isSwipeUp) {
-      const newStep = Math.min(stepsLength - 1, currentStep + 1);
-      handleStepChange(newStep);
+      const newStep = Math.min(content.steps.length - 1, currentStep + 1);
+      handleStepChange(newStep, content.steps[newStep]?.state);
     }
     if (isSwipeDown) {
       const newStep = Math.max(0, currentStep - 1);
-      handleStepChange(newStep);
+      handleStepChange(newStep, content.steps[newStep]?.state);
     }
     setTouchStart(null);
     setTouchEnd(null);
@@ -59,7 +75,7 @@ export default function AlgorithmLayout({ algorithmId }: AlgorithmLayoutProps) {
       document.body.style.overflow = '';
       document.documentElement.style.overflow = '';
     };
-  }, [currentStep, stepsLength, touchStart, touchEnd]);
+  }, [currentStep, content.steps.length, touchStart, touchEnd]);
 
   const handleStepChange = (step: number, state?: number) => {
     setCurrentStep(step);
@@ -84,7 +100,8 @@ export default function AlgorithmLayout({ algorithmId }: AlgorithmLayoutProps) {
           algorithmId={algorithmId}
           currentStep={currentStep}
           onStepChange={handleStepChange}
-          onStepsLengthChange={setStepsLength}
+          content={content}
+          setContent={setContent}
         />
       </div>
     </div>
